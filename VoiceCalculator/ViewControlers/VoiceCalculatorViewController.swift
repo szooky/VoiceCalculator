@@ -8,6 +8,7 @@
 
 import UIKit
 import Speech
+import AVFoundation
 
 class VoiceCalculatorViewController: UIViewController {
 
@@ -18,11 +19,15 @@ class VoiceCalculatorViewController: UIViewController {
     fileprivate let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))!
     fileprivate var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     fileprivate var recognitionTask: SFSpeechRecognitionTask?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setApperance()
         listenButton.isEnabled = false
+        
+        self.read(self.recognizedSpeechLabel.text!)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,6 +35,10 @@ class VoiceCalculatorViewController: UIViewController {
         
         speechRecognizer.delegate = self
         checkForSpeechRecognitionPermissions()
+    }
+    
+    private func setApperance() {
+        listenButton.layer.cornerRadius = listenButton.frame.width / 2
     }
     
     @IBAction func listenButtonClicked(_ sender: UIButton) {
@@ -40,7 +49,7 @@ class VoiceCalculatorViewController: UIViewController {
             listenButton.setTitle("Stopping", for: .disabled)
         } else {
             try! startRecording()
-            listenButton.setTitle("Stop recording", for: [])
+            listenButton.setTitle("Stop", for: [])
         }
     }
     
@@ -57,22 +66,23 @@ extension VoiceCalculatorViewController: SFSpeechRecognizerDelegate {
                     
                 case .denied:
                     self.listenButton.isEnabled = false
-                    self.listenButton.setTitle("You disabled access to speech recognition.", for: .disabled)
+                    self.recognizedSpeechLabel.text = "You disabled access to speech recognition."
                     
                 case .notDetermined:
                     self.listenButton.isEnabled = false
-                    self.listenButton.setTitle("Speech recognition is not authorized.", for: .disabled)
+                    self.recognizedSpeechLabel.text = "Speech recognition is not authorized."
+
                     
                 case .restricted:
                     self.listenButton.isEnabled = false
-                    self.listenButton.setTitle("Speech recognition is restricted", for: .disabled)
+                    self.recognizedSpeechLabel.text = "Speech recognition is restricted"
+
                 }
             }
         }
     }
     
     fileprivate func startRecording() throws {
-        
         if let recognitionTask = recognitionTask {
             recognitionTask.cancel()
             self.recognitionTask = nil
@@ -107,6 +117,9 @@ extension VoiceCalculatorViewController: SFSpeechRecognizerDelegate {
                 
                 self.listenButton.isEnabled = true
                 self.listenButton.setTitle("Listen", for: [])
+                
+                self.read(self.recognizedSpeechLabel.text!)
+                
             }
         }
         
@@ -131,6 +144,24 @@ extension VoiceCalculatorViewController: SFSpeechRecognizerDelegate {
         }
     }
 
+}
 
+extension VoiceCalculatorViewController {
+    
+    fileprivate func read(_ textToRead: String) {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+            try audioSession.setMode(AVAudioSessionModeDefault)
+            
+        } catch {
+            print("audioSession properties weren't set because of an error.")
+        }
+        
+        let speechSynthesizer = AVSpeechSynthesizer()
+        let speechUtterance = AVSpeechUtterance(string: textToRead)
+        speechSynthesizer.speak(speechUtterance)
+        
+    }
 }
 
