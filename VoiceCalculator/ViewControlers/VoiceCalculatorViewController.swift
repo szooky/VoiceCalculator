@@ -7,11 +7,130 @@
 //
 
 import UIKit
+import Speech
 
 class VoiceCalculatorViewController: UIViewController {
 
+    @IBOutlet weak var listenButton: UIButton!
+    @IBOutlet weak var recognizedSpeechLabel: UILabel!
+    
+    fileprivate let audioEngine = AVAudioEngine()
+    fileprivate let speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "en-US"))!
+    fileprivate var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    fileprivate var recognitionTask: SFSpeechRecognitionTask?
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        listenButton.isEnabled = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        speechRecognizer.delegate = self
+        checkForSpeechRecognitionPermissions()
+    }
+    
+    @IBAction func listenButtonClicked(_ sender: UIButton) {
+        if audioEngine.isRunning {
+            audioEngine.stop()
+            recognitionRequest?.endAudio()
+            listenButton.isEnabled = false
+            listenButton.setTitle("Stopping", for: .disabled)
+        } else {
+            try! startRecording()
+            listenButton.setTitle("Stop recording", for: [])
+        }
+    }
+    
+}
+
+extension VoiceCalculatorViewController: SFSpeechRecognizerDelegate {
+    
+    fileprivate func checkForSpeechRecognitionPermissions() {
+        SFSpeechRecognizer.requestAuthorization { authorizationStatus in
+            OperationQueue.main.addOperation {
+                switch authorizationStatus {
+                case .authorized:
+                    self.listenButton.isEnabled = true
+                    
+                case .denied:
+                    self.listenButton.isEnabled = false
+                    self.listenButton.setTitle("You disabled access to speech recognition.", for: .disabled)
+                    
+                case .notDetermined:
+                    self.listenButton.isEnabled = false
+                    self.listenButton.setTitle("Speech recognition is not authorized.", for: .disabled)
+                    
+                case .restricted:
+                    self.listenButton.isEnabled = false
+                    self.listenButton.setTitle("Speech recognition is restricted", for: .disabled)
+                }
+            }
+        }
+    }
+    
+    fileprivate func startRecording() throws {
+        
+        if let recognitionTask = recognitionTask {
+            recognitionTask.cancel()
+            self.recognitionTask = nil
+        }
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        try audioSession.setCategory(AVAudioSessionCategoryRecord)
+        try audioSession.setMode(AVAudioSessionModeMeasurement)
+        try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+        
+        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+        
+        guard let inputNode = audioEngine.inputNode else { fatalError("Audio engine has no input node") }
+        guard let recognitionRequest = recognitionRequest else { fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object") }
+        
+        recognitionRequest.shouldReportPartialResults = true
+        
+        recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
+            var isFinal = false
+            
+            if let result = result {
+                self.recognizedSpeechLabel.text = result.bestTranscription.formattedString
+                isFinal = result.isFinal
+            }
+            
+            if error != nil || isFinal {
+                self.audioEngine.stop()
+                inputNode.removeTap(onBus: 0)
+                
+                self.recognitionRequest = nil
+                self.recognitionTask = nil
+                
+                self.listenButton.isEnabled = true
+                self.listenButton.setTitle("Listen", for: [])
+            }
+        }
+        
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+            self.recognitionRequest?.append(buffer)
+        }
+        
+        audioEngine.prepare()
+        try audioEngine.start()
+        
+        recognizedSpeechLabel.text = "listening..."
+    }
+    
+    public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
+        if available {
+            listenButton.isEnabled = true
+            listenButton.setTitle("Listen", for: [])
+        } else {
+            listenButton.isEnabled = false
+            listenButton.setTitle("Recognition not available", for: .disabled)
+        }
     }
 
+
 }
+

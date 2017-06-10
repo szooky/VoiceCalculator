@@ -233,6 +233,7 @@
 				TargetAttributes = {
 					9E9D184B1EEC05DD005D29E3 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = GN5RD5DNZH;
 						ProvisioningStyle = Automatic;
 					};
 					9E9D185F1EEC05DD005D29E3 = {
@@ -456,6 +457,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GN5RD5DNZH;
 				INFOPLIST_FILE = VoiceCalculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fs.VoiceCalculator;
@@ -468,6 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GN5RD5DNZH;
 				INFOPLIST_FILE = VoiceCalculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fs.VoiceCalculator;
@@ -549,6 +552,7 @@
 				9E9D18761EEC05DD005D29E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9E9D18771EEC05DD005D29E3 /* Build configuration list for PBXNativeTarget "VoiceCalculatorTests" */ = {
 			isa = XCConfigurationList;
@@ -557,6 +561,7 @@
 				9E9D18791EEC05DD005D29E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9E9D187A1EEC05DD005D29E3 /* Build configuration list for PBXNativeTarget "VoiceCalculatorUITests" */ = {
 			isa = XCConfigurationList;
@@ -565,6 +570,7 @@
 				9E9D187C1EEC05DD005D29E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
