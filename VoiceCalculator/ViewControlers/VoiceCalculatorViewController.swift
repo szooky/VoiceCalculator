@@ -20,7 +20,6 @@ class VoiceCalculatorViewController: UIViewController {
     fileprivate var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     fileprivate var recognitionTask: SFSpeechRecognitionTask?
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +27,12 @@ class VoiceCalculatorViewController: UIViewController {
         listenButton.isEnabled = false
         
         self.read(self.recognizedSpeechLabel.text!)
+                
+        print("2+2=\(MathExpressionCalculator.parse(expression: "2+2"))")
+        print("2-1=\(MathExpressionCalculator.parse(expression: "2-1"))")
+        print("5*3=\(MathExpressionCalculator.parse(expression: "5*3"))")
+        print("1+3*2=\(MathExpressionCalculator.parse(expression: "1+3*2"))")
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -119,7 +124,6 @@ extension VoiceCalculatorViewController: SFSpeechRecognizerDelegate {
                 self.listenButton.setTitle("Listen", for: [])
                 
                 self.read(self.recognizedSpeechLabel.text!)
-                
             }
         }
         
@@ -163,5 +167,6 @@ extension VoiceCalculatorViewController {
         speechSynthesizer.speak(speechUtterance)
         
     }
+    
 }
 

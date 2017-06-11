@@ -14,6 +14,7 @@
 		9E9D18651EEC05DD005D29E3 /* VoiceCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9D18641EEC05DD005D29E3 /* VoiceCalculatorTests.swift */; };
 		9E9D18701EEC05DD005D29E3 /* VoiceCalculatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9D186F1EEC05DD005D29E3 /* VoiceCalculatorUITests.swift */; };
 		9E9D18831EEC0F1D005D29E3 /* VoiceCalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E9D18821EEC0F1D005D29E3 /* VoiceCalculatorViewController.swift */; };
+		9EADA2641EECB07800728B9C /* MathExpressionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EADA2631EECB07800728B9C /* MathExpressionCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		9E9D186F1EEC05DD005D29E3 /* VoiceCalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceCalculatorUITests.swift; sourceTree = "<group>"; };
 		9E9D18711EEC05DD005D29E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E9D18821EEC0F1D005D29E3 /* VoiceCalculatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceCalculatorViewController.swift; sourceTree = "<group>"; };
+		9EADA2631EECB07800728B9C /* MathExpressionCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathExpressionCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				9E9D18811EEC0A4C005D29E3 /* App */,
 				9E9D18801EEC0A41005D29E3 /* Resources */,
 				9E9D187E1EEC0893005D29E3 /* Models */,
+				9EADA2621EECB06700728B9C /* MathExpressionCalculator */,
 				9E9D187F1EEC089D005D29E3 /* Storyboards */,
 				9E9D187D1EEC0886005D29E3 /* ViewControlers */,
 			);
@@ -163,6 +166,14 @@
 				9E9D184F1EEC05DD005D29E3 /* AppDelegate.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		9EADA2621EECB06700728B9C /* MathExpressionCalculator */ = {
+			isa = PBXGroup;
+			children = (
+				9EADA2631EECB07800728B9C /* MathExpressionCalculator.swift */,
+			);
+			path = MathExpressionCalculator;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E9D18501EEC05DD005D29E3 /* AppDelegate.swift in Sources */,
+				9EADA2641EECB07800728B9C /* MathExpressionCalculator.swift in Sources */,
 				9E9D18831EEC0F1D005D29E3 /* VoiceCalculatorViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
