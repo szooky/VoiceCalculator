@@ -27,12 +27,6 @@ class VoiceCalculatorViewController: UIViewController {
         listenButton.isEnabled = false
         
         self.read(self.recognizedSpeechLabel.text!)
-                
-        print("2+2=\(MathExpressionCalculator.parse(expression: "2+2"))")
-        print("2-1=\(MathExpressionCalculator.parse(expression: "2-1"))")
-        print("5*3=\(MathExpressionCalculator.parse(expression: "5*3"))")
-        print("1+3*2=\(MathExpressionCalculator.parse(expression: "1+3*2"))")
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -104,6 +98,7 @@ extension VoiceCalculatorViewController: SFSpeechRecognizerDelegate {
         guard let recognitionRequest = recognitionRequest else { fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object") }
         
         recognitionRequest.shouldReportPartialResults = true
+        recognitionRequest.taskHint = .search
         
         recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) { result, error in
             var isFinal = false
@@ -123,7 +118,13 @@ extension VoiceCalculatorViewController: SFSpeechRecognizerDelegate {
                 self.listenButton.isEnabled = true
                 self.listenButton.setTitle("Listen", for: [])
                 
-                self.read(self.recognizedSpeechLabel.text!)
+                let queue = DispatchQueue(label: "com.VoiceCalculator.MathParserQueue", qos: DispatchQoS.background)
+                queue.async {
+                    let result = MathExpressionCalculator.parse(expression: self.recognizedSpeechLabel.text!)
+                    self.read("\(result)")
+                }
+                
+                print(self.recognizedSpeechLabel.text!)
             }
         }
         

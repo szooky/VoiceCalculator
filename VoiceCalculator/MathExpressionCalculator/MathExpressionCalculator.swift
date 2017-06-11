@@ -37,7 +37,7 @@ class MathExpressionCalculator {
         var parsedNumber = numberParseResult.0
         var expressionLeftToParse = numberParseResult.1
         
-        if expressionLeftToParse.characters.first == "*" {
+        if expressionLeftToParse.characters.first == "×" {
             let rightSideMultiplicationParseResult = parse(multiplication: expressionLeftToParse.dropFirstCharacter())
             let parsedRightNumber = rightSideMultiplicationParseResult.0
             
