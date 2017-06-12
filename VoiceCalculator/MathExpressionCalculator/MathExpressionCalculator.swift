@@ -10,8 +10,17 @@ import Foundation
 
 class MathExpressionCalculator {
     
-    public class func parse(expression: String) -> Int {
-        return parse(additionAndSubtraction: expression)
+    public class func parse(expression: String) -> Int? {
+        if contains(mathExpression: expression) {
+            return parse(additionAndSubtraction: expression)
+        } else {
+            return nil
+        }
+    }
+    
+    private class func contains(mathExpression expression: String) -> Bool {
+        let regex = "^(\\d+[-+*])*\\d+"
+        return (expression.range(of: regex, options: .regularExpression) != nil)
     }
     
     private class func parse(additionAndSubtraction expression: String) -> Int {

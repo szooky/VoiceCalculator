@@ -118,13 +118,7 @@ extension VoiceCalculatorViewController: SFSpeechRecognizerDelegate {
                 self.listenButton.isEnabled = true
                 self.listenButton.setTitle("Listen", for: [])
                 
-                let queue = DispatchQueue(label: "com.VoiceCalculator.MathParserQueue", qos: DispatchQoS.background)
-                queue.async {
-                    let result = MathExpressionCalculator.parse(expression: self.recognizedSpeechLabel.text!)
-                    self.read("\(result)")
-                }
-                
-                print(self.recognizedSpeechLabel.text!)
+                self.handleRecognizedSpeechResults()
             }
         }
         
@@ -139,6 +133,18 @@ extension VoiceCalculatorViewController: SFSpeechRecognizerDelegate {
         recognizedSpeechLabel.text = "listening..."
     }
     
+    private func handleRecognizedSpeechResults() {
+        let queue = DispatchQueue(label: "com.VoiceCalculator.MathParserQueue", qos: DispatchQoS.background)
+        queue.async {
+            let mathExpression = self.trimMathExpressionFrom(string: self.recognizedSpeechLabel.text!)
+            if let result = MathExpressionCalculator.parse(expression: mathExpression) {
+                self.read("\(result)")
+            } else {
+                self.read("I don't understand this expression. Please try again.")
+            }
+        }
+    }
+    
     public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {
         if available {
             listenButton.isEnabled = true
@@ -147,6 +153,16 @@ extension VoiceCalculatorViewController: SFSpeechRecognizerDelegate {
             listenButton.isEnabled = false
             listenButton.setTitle("Recognition not available", for: .disabled)
         }
+    }
+    
+    private func trimMathExpressionFrom(string: String) -> String {
+        let invertedMathCharacterSet = CharacterSet(charactersIn: "+-×0123456789").inverted
+        var result = string.replacingOccurrences(of: "one", with: "1", options: .caseInsensitive) //workaround for "1" recognized as "One" when said at the begining of expression
+        result = result.trimmingCharacters(in: invertedMathCharacterSet)
+        result = result.replacingOccurrences(of: " ", with: "")
+        
+        print(result)
+        return result
     }
 
 }
