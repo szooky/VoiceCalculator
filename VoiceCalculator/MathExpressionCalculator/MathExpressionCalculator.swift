@@ -19,7 +19,7 @@ class MathExpressionCalculator {
     }
     
     private class func contains(mathExpression expression: String) -> Bool {
-        let regex = "^(\\d+[-+*])*\\d+"
+        let regex = "^(\\d+[-+*])*\\d+" //it fails on numberoperator, eg. 2+, I don't know why
         return (expression.range(of: regex, options: .regularExpression) != nil)
     }
     
