@@ -38,9 +38,9 @@
 		9E9D184C1EEC05DD005D29E3 /* VoiceCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VoiceCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E9D184F1EEC05DD005D29E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = VoiceCalculator/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		9E9D18541EEC05DD005D29E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9E9D18561EEC05DD005D29E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../Assets.xcassets; sourceTree = "<group>"; };
+		9E9D18561EEC05DD005D29E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E9D18591EEC05DD005D29E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9E9D185B1EEC05DD005D29E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		9E9D185B1EEC05DD005D29E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E9D18601EEC05DD005D29E3 /* VoiceCalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VoiceCalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E9D18641EEC05DD005D29E3 /* VoiceCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceCalculatorTests.swift; sourceTree = "<group>"; };
 		9E9D18661EEC05DD005D29E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,6 +99,8 @@
 		9E9D184E1EEC05DD005D29E3 /* VoiceCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				9E9D185B1EEC05DD005D29E3 /* Info.plist */,
+				9E9D18561EEC05DD005D29E3 /* Assets.xcassets */,
 				9E9D18811EEC0A4C005D29E3 /* App */,
 				9E9D18801EEC0A41005D29E3 /* Resources */,
 				9E9D187E1EEC0893005D29E3 /* Models */,
@@ -154,8 +156,6 @@
 		9E9D18801EEC0A41005D29E3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9E9D185B1EEC05DD005D29E3 /* Info.plist */,
-				9E9D18561EEC05DD005D29E3 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
