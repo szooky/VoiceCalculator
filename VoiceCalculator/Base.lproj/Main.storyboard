@@ -37,25 +37,28 @@
                                     <action selector="listenButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gRH-i4-n7D"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DyM-x8-Yw3">
-                                <rect key="frame" x="54" y="404" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go on, ask me some math questions..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BFL-oI-HpE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ask me some math questions..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BFL-oI-HpE">
                                 <rect key="frame" x="26" y="297.5" width="323" height="72"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filip Szukała's Voice Calculator" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0a8-rl-5gz">
+                                <rect key="frame" x="69" y="40" width="236" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="DcD-h6-ufu" secondAttribute="bottom" constant="20" id="4Qb-iH-5P2"/>
+                            <constraint firstItem="0a8-rl-5gz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="B8u-Xm-giD"/>
                             <constraint firstItem="DcD-h6-ufu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EVO-D3-F9c"/>
                             <constraint firstItem="BFL-oI-HpE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="Gq8-0t-qG7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BFL-oI-HpE" secondAttribute="trailing" constant="10" id="IYO-lj-ubk"/>
                             <constraint firstItem="BFL-oI-HpE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="Lnl-Uz-Kef"/>
+                            <constraint firstItem="0a8-rl-5gz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="X7O-WB-dp3"/>
                             <constraint firstItem="BFL-oI-HpE" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="cdI-uQ-bb8"/>
                             <constraint firstItem="DcD-h6-ufu" firstAttribute="top" relation="greaterThanOrEqual" secondItem="BFL-oI-HpE" secondAttribute="bottom" constant="20" id="vzW-JJ-Vfh"/>
                         </constraints>
